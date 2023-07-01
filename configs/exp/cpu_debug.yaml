@@ -1,0 +1,44 @@
+# @package _global_
+defaults:
+  - override /data: arxiv
+#  - override /model: llama
+
+#debug: true
+debug: true
+mock: true
+eval_freq: 50
+data:
+  fanout: [ ]
+  sample_per_class: 100
+
+#exp: seal_llama
+llm:
+  _file_: <[FAKE-LM-DEBUG-ONLY]>
+#
+#env:
+#  proj:
+#    name: QLoRA
+#  path:
+#    home: /Users/andyzhao/Projects/
+#    scratch: ${.home}
+#    conda_home: /Users/andyzhao/miniconda3/bin/
+#    python: ${.conda_home}python
+#    project: ${.home}${..proj.name}/
+#    temp_dir: temp/
+#    slurm_tmp_dir: temp/
+#    out_file_prefix: output/CPU_DEBUG/ #
+#    raw_data_dir: ${.scratch}shared_data/
+#    temp_data_dir: ${.temp_dir}${data.name}/
+#  vars: # To be initialized by os.env
+#    cuda_home: /cvmfs/ai.mila.quebec/apps/arch/common/cuda/11.0/
+#    path: ${..path.conda_home}
+#    wandb_api_key: 3ef1e44888ea76be71688b6c760dcf0774a09373
+#    wandb_dir: ${..path.temp_dir}/
+#    wandb_entity: jzshared
+#    wandb_proj: ${..proj.name}
+#    openai_api_key: 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
+#    hydra_full_error: '1' # Use Rich-traceback instead of Hydra-traceback
+#    # Project aliases
+#  aliases: # For shell convenience
+#    debug: python src/mplm/run_mplm.py debug=True
+#    train: python src/mplm/run_mplm.py debug=True

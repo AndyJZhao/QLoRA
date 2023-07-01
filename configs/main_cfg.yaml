@@ -1,0 +1,53 @@
+# @package _global_
+# ! Primary hydra config for ALL models
+defaults:
+  - proj/env
+  - proj/meta_data
+  - _self_ # To be overwritten by experimental settings
+  - data: arxiv
+  - model: mplm
+  - prompt: prompts
+  - llm: vicuna
+  - exp: arxiv/debug
+
+# ! Experiments
+seed: 2023
+working_dir: ${env.path.slurm_tmp_dir}working_dir/${.uid}/ # For deletable temporary files.
+out_file_prefix: ${env.path.out_dir}${oc.select:wandb.sweep_id,local}/${.alias}-${.uid} # For files to be saved, to be initialized
+uid: null # To be generated in the main program
+_mode: normal
+debug: true
+#local_rank: -1 # <0 for single device, >0 for DDP
+#
+eval_freq: 50
+#use_wandb: true
+use_wandb: false
+alias: ${llm.name}${data.build_func}${data.name}
+wandb:
+  id: null
+  name: ${alias}
+
+
+hydra:
+  run:
+    dir: ../temp/hydra/${now:%Y.%m.%d}/${now:%H.%M.%S}
+#  choices: # Used in getting the overwritten default list.
+#    exp: ???
+#    llm: ???
+#    data: ???
+#    model: ???
+#  sweep:
+#    dir: ${oc.env:HOME}/scratch/CO-GFN/mis/${now:%Y.%m.%d}/${now:%H.%M.%S}
+#    subdir: ${hydra.job.override_dirname}
+
+# ! _file_ related
+# To distinguish experiment checkpoints, we want to create the unique file setting for
+# each setting. However, some settings are unimportant, and we want to abandon them while
+# printing or saving checkpoints.
+_unimportant_cfg:
+  fields: [ gpus, debug, wandb, proj, env, uid,
+            local_rank, cmd, label_name,
+            use_wandb, prompt_templates,n_nodes,n_labels
+  ]
+  postfix: [ _path, _file, _dir, _url ]
+  prefix: [ _ ]
