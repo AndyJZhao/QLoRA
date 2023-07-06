@@ -40,12 +40,12 @@ pip install -U -r requirements.txt
 The `qlora.py` code is a starting point for finetuning and inference on various datasets.
 Basic command for finetuning a baseline model on the Alpaca dataset:
 ```bash
-python qlora.py --model_name_or_path <path_or_name>
+python run_Qlora.py --model_name_or_path <path_or_name>
 ```
 
 For models larger than 13B, we recommend adjusting the learning rate:
 ```bash
-python qlora.py –learning_rate 0.0001 --model_name_or_path <path_or_name>
+python run_Qlora.py –learning_rate 0.0001 --model_name_or_path <path_or_name>
 ```
 
 To replicate our Guanaco models see below.
@@ -97,11 +97,11 @@ You can specify the path to your dataset using the `--dataset` argument. If the 
 
 - Training with an *alpaca* format dataset:
   ```bash
-  python qlora.py --dataset="path/to/your/dataset"
+  python run_Qlora.py --dataset="path/to/your/dataset"
   ```
 - Training with a *self-instruct* format dataset:
    ```bash
-   python qlora.py --dataset="path/to/your/dataset" --dataset_format="self-instruct"
+   python run_Qlora.py --dataset="path/to/your/dataset" --dataset_format="self-instruct"
    ```
 
 ### Multi GPU
